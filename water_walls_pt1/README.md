@@ -2,20 +2,20 @@
 
 ## Inputs & Outputs
 const checklist = [
-  { input: [5, 3, 7, 2, 6, 4, 5, 9, 1, 2], output: [3, 8, 11] },
-  { input: [], output: null },
-  { input: [5], output: null },
-  { input: [5, 10], output: null },
-  { input: [1, 2, 3], output: null },
-  { input: [3, 2, 1], output: null },
-  { input: [2, 3, 2], output: null },
-  { input: [2, 1, 3], output: [1, 3, 1] },
-  { input: [2, 0, 3], output: [1, 3, 2] },
-  { input: [2, 1, 3], output: [1, 3, 1] },
-  { input: [2, 3, 4, 3, 1, 2], output: [4, 6, 1] },
-  { input: [2, 3, 4, 3, 1, 2, 1, 1, 1], output: [4, 6, 1] },
-  { input: [2, 1, 3, 1, 2], output: [1, 3, 1] },
-  { input: [2, 1, 3, 0, 2], output: [3, 5, 2] },
+-  { input: [5, 3, 7, 2, 6, 4, 5, 9, 1, 2], output: [3, 8, 11] },
+-  { input: [], output: null },
+-  { input: [5], output: null },
+-  { input: [5, 10], output: null },
+-  { input: [1, 2, 3], output: null },
+-  { input: [3, 2, 1], output: null },
+-  { input: [2, 3, 2], output: null },
+-  { input: [2, 1, 3], output: [1, 3, 1] },
+-  { input: [2, 0, 3], output: [1, 3, 2] },
+-  { input: [2, 1, 3], output: [1, 3, 1] },
+-  { input: [2, 3, 4, 3, 1, 2], output: [4, 6, 1] },
+-  { input: [2, 3, 4, 3, 1, 2, 1, 1, 1], output: [4, 6, 1] },
+-  { input: [2, 1, 3, 1, 2], output: [1, 3, 1] },
+-  { input: [2, 1, 3, 0, 2], output: [3, 5, 2] },
 ];
 
 ## Constraints
