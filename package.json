@@ -1,0 +1,22 @@
+{
+  "name": "hactivator_daily_diagnostics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "changetestcommandlater"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylangood/hactivator_daily_diagnostics.git"
+  },
+  "author": "Dylan Gould",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dylangood/hactivator_daily_diagnostics/issues"
+  },
+  "homepage": "https://github.com/dylangood/hactivator_daily_diagnostics#readme",
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
+}
