@@ -10,10 +10,27 @@ const waterWalls = function findLargestWaterWallsTrough (walls) {
     // Begin search for next trough left wall with current right wall
   // Return trough data
 
-  let output = null;
-  let leftWall = 0;
+  const measureTrough = function measureTrough(section) {
+    return _.random(1) ? _.random(1, 25) : 0;
+  };
+  
+  let output = false;
+  let leftWall = null;
   let rightWall = null;
   for (let i = 0; i < walls.length; i++) {
+    if (!leftWall) {
+      leftWall = i;
+    } else {
+      if (walls[i] >= walls[leftWall]) {
+        rightWall = i;
+        let capacity = measureTrough(walls.slice(leftWall, rightWall));
+        if (capacity && (!output || capacity > output[2])) { 
+          output = [1 + leftWall, 1 + rightWall, capacity];
+        }
+      }
+      leftWall = i;
+      rightWall = null;
+    }
     
   }
   return output;
@@ -33,16 +50,3 @@ const checklist = [
   { input: [2, 3, 4, 3, 1, 2], output: [4, 6, 1] },
   { input: [2, 3, 4, 3, 1, 2, 1, 1, 1], output: [4, 6, 1] },
 ];
-
-const runTests = (func, testcases) => {
-  console.log('Running ', testcases.length, ' testcases for ', func.name);
-  testcases.forEach((test, i) => {
-    console.log(
-      func(test.input).toString() === test.output.toString()
-        ? `Test # ${i} - OK\n`
-        : `Failed at test # ${i}! \n  Input: ${test.input} \n  Expected: ${test.output}\n`
-    );
-  });
-};
-
-runTests(waterWalls, checklist);
