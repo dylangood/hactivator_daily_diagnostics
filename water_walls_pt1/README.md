@@ -81,13 +81,13 @@ Expected O(n) is linear - we should only need to pass over the whole array once,
 
 ## Main Function
 const waterWalls = function findLargestWaterWallsTrough (walls) {
-  // Starting at the left edge, repeat until out of walls:
-    // Proceed right until the left wall of a trough is found. Record position, (i + 1)
-    // Proceed right until the right wall of a trough is found. Record position (j + 1), then measure the trough:
-      // Of the 2 walls, the shortest sets the waterLevel. 
-      // Iterate thru walls between them (non-inclusive), summing the differences: waterLevel - wall
-    // Compare sum with greatest capacity found so far, and if greater, replace with latest trough data.
-    // Begin search for next trough left wall with current right wall
-  // Return trough data
+*  // Starting at the left edge, repeat until out of walls:
+*    // Proceed right until the left wall of a trough is found. Record position, (i + 1)
+*    // Proceed right until the right wall of a trough is found. Record position (j + 1), then measure the trough:
+*      // Of the 2 walls, the shortest sets the waterLevel. 
+*      // Iterate thru walls between them (non-inclusive), summing the differences: waterLevel - wall
+*    // Compare sum with greatest capacity found so far, and if greater, replace with latest trough data.
+*    // Begin search for next trough left wall with current right wall
+*  // Return trough data
 };
 
