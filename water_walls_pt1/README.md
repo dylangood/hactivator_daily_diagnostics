@@ -1,6 +1,6 @@
 # Water Walls Part 1
 
-* Inputs & Outputs
+## Inputs & Outputs
 const checklist = [
   { input: [5, 3, 7, 2, 6, 4, 5, 9, 1, 2], output: [3, 8, 11] },
   { input: [], output: null },
@@ -18,68 +18,68 @@ const checklist = [
   { input: [2, 1, 3, 0, 2], output: [3, 5, 2] },
 ];
 
-* Constraints
-- The bottom of the container is solid; water doesn't leak out when a wall is 0.
-- The container has no left/right wall; water DOES leak out the sides.
-- Return null in all cases where no trough can be specified.
-- When multiple troughs are tied for the largest, choose the leftmost tied trough.
+## Constraints
+* The bottom of the container is solid; water doesn't leak out when a wall is 0.
+* The container has no left/right wall; water DOES leak out the sides.
+* Return null in all cases where no trough can be specified.
+* When multiple troughs are tied for the largest, choose the leftmost tied trough.
 
-* Strategy
+## Strategy
 Starting from the left, find a trough, measure its capacity & store the location & capacity.
 Then find the next trough, and if it's larger, toss out the old to store the new.
 Keep going like this till we run out of walls.
 
-* Big-O Complexity
+## Big-O Complexity
 Expected O(n) is linear - we should only need to pass over the whole array once, tho we hit trough areas twice.
 
-* Transformations
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-^
-largest: null
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
- L^
-largest: null
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
- L  ^
-largest: null
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
- L     ^
-largest: null
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
- L     R^
-largest: [1, 3, 2]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L^
-largest: [1, 3, 2]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L  ^
-largest: [1, 3, 2]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L     ?^
-largest: [1, 3, 4]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L     ?  ^
-largest: [1, 3, 4]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L     ?     ^
-largest: [1, 3, 4]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-       L     x        R^
-largest: [3, 8, 11]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-                      L^
-largest: [3, 8, 11]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-                      L  ^
-largest: [3, 8, 11]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-                      L     R^
-largest: [3, 8, 11]
-[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
-                              ^
-output: [3, 8, 11]
+## Transformations
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+- ^
+- largest: null
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+- L^
+- largest: null
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-  L  ^
+- largest: null
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-  L     ^
+- largest: null
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-  L     R^
+- largest: [1, 3, 2]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L^
+- largest: [1, 3, 2]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L  ^
+- largest: [1, 3, 2]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L     ?^
+- largest: [1, 3, 4]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L     ?  ^
+- largest: [1, 3, 4]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L     ?     ^
+- largest: [1, 3, 4]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-        L     x        R^
+- largest: [3, 8, 11]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-                       L^
+- largest: [3, 8, 11]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-                       L  ^
+- largest: [3, 8, 11]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-                       L     R^
+- largest: [3, 8, 11]
+* [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
+-                               ^
+- output: [3, 8, 11]
 
-* Main Function
+## Main Function
 const waterWalls = function findLargestWaterWallsTrough (walls) {
   // Starting at the left edge, repeat until out of walls:
     // Proceed right until the left wall of a trough is found. Record position, (i + 1)
