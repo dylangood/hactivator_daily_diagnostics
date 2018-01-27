@@ -1,49 +1,62 @@
 const _ = require('lodash');
 
-const waterWalls = function findLargestWaterWallsTrough (walls) {
-  // Starting at the left edge, repeat until out of walls:
-    // Proceed right until the left wall of a trough is found. Record position, (i + 1)
-    // Proceed right until the right wall of a trough is found. Record position (j + 1), then measure the trough:
-      // Of the 2 walls, the shortest sets the waterLevel. 
-      // Iterate thru walls between them (non-inclusive), summing the differences: waterLevel - wall
-    // Compare sum with greatest capacity found so far, and if greater, replace with latest trough data.
-    // Begin search for next trough left wall with current right wall
-  // Return trough data
-
+const waterWalls = function findLargestWaterWallsTrough (heights) {
+  
   const measureTrough = function measureTrough(section) {
-    return _.random(1) ? _.random(1, 25) : 0;
+    let waterLevel = Math.min(section[0], section[section.length - 1]);
+    let waterVolume = 0;
+    for (let i = 1; i < section.length - 1; i++) {
+      waterVolume += Math.max(0, waterLevel - section[i]);
+    }
+    return waterVolume;
   };
   
-  let output = false;
-  let leftWall = null;
-  let rightWall = null;
-  for (let i = 0; i < walls.length; i++) {
-    if (!leftWall) {
-      leftWall = i;
-    } else {
-      if (walls[i] >= walls[leftWall]) {
+  const findTroughs = function findTroughsClimbingTowardsPeak(heights) {
+    let troughData = false;
+    let leftWall = 0;
+    let rightWall = 1;
+    for (let i = 2; i < heights.length; i++) {
+      if (heights[i] >= heights[leftWall]) {
         rightWall = i;
-        let capacity = measureTrough(walls.slice(leftWall, rightWall));
-        if (capacity && (!output || capacity > output[2])) { 
-          output = [1 + leftWall, 1 + rightWall, capacity];
+        let capacity = measureTrough(heights.slice(leftWall, rightWall + 1));
+        if (capacity && (!troughData || capacity > troughData[2])) {
+          troughData = [1 + leftWall, 1 + rightWall, capacity];
         }
-      }
-      leftWall = i;
-      rightWall = null;
+        leftWall = i;
+        rightWall = i + 1;
+      } 
     }
-    
+    return troughData;
+  };
+  
+  if (heights.length < 3) { return false; }
+  
+  let peak = heights.indexOf(Math.max(...heights));
+  
+  let west = heights.slice(0, peak + 1);
+  let east = heights.slice(peak).reverse();
+  
+  let westBest = findTroughs(west);
+  let eastBest = findTroughs(east);
+  if (eastBest) {
+    eastBest = [heights.length - eastBest[1] + 1, heights.length - eastBest[0] + 1, eastBest[2]];
   }
-  return output;
+  if (eastBest && westBest) {
+    return eastBest[2] > westBest[2] ? eastBest : westBest;
+  } else {
+    return westBest || eastBest || false;
+  } 
 };
 
 const checklist = [
   { input: [5, 3, 7, 2, 6, 4, 5, 9, 1, 2], output: [3, 8, 11] },
-  { input: [], output: null },
-  { input: [5], output: null },
-  { input: [5, 10], output: null },
-  { input: [1, 2, 3], output: null },
-  { input: [3, 2, 1], output: null },
-  { input: [2, 3, 2], output: null },
+  { input: [5, 3, 7, 2, 6, 4, 5, 6, 1, 2], output: [3, 5, 4] },
+  { input: [], output: false },
+  { input: [5], output: false },
+  { input: [5, 10], output: false },
+  { input: [1, 2, 3], output: false },
+  { input: [3, 2, 1], output: false },
+  { input: [2, 3, 2], output: false },
   { input: [2, 1, 3], output: [1, 3, 1] },
   { input: [2, 0, 3], output: [1, 3, 2] },
   { input: [2, 1, 3], output: [1, 3, 1] },
